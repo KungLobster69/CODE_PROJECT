@@ -3,14 +3,15 @@ import mediapipe as mp
 import pickle
 import matplotlib.pyplot as plt
 
-Data_description = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Data_description', 'rb'))
-Time_series = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Time_series', 'rb'))
+Data_description = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Data_description', 'rb'))
+Time_series = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Time_series', 'rb'))
 
-# for Human in Data_description:
-#     frame_sec = Human[1]
-#     frame_all = Human[2]
-#     time_all_sec = frame_all/frame_sec
-#     time_all_minutes = (frame_all/frame_sec)/60
+for Human in Data_description:
+    frame_sec = Human[1]
+    frame_all = Human[2]
+    time_all_sec = frame_all/frame_sec
+    time_all_minutes = (frame_all/frame_sec)/60
+    
 for Point in Time_series:
     left_knee_DATA = Point[0]
     right_knee_DATA = Point[1]
@@ -20,16 +21,43 @@ for Point in Time_series:
     right_foot_DATA = Point[5]
     left_hell_DATA = Point[6]
     right_hell_DATA = Point[7]
-
     
-m = left_knee_DATA.shape
-X = np.zeros((len(left_knee_DATA),8))
-Y = np.zeros((len(left_knee_DATA),8))
-Z = np.zeros((len(left_knee_DATA),8))
-
-for i in range(len(left_knee_DATA)):
-    X[i,] = left_knee_DATA[i,0],right_knee_DATA[i,0],left_ankle_DATA[i,0],right_ankle_DATA[i,0],left_foot_DATA[i,0],right_foot_DATA[i,0],left_hell_DATA[i,0],right_hell_DATA[i,0]
+    X = np.zeros((len(left_knee_DATA),8))
+    Y = np.zeros((len(left_knee_DATA),8))
+    Z = np.zeros((len(left_knee_DATA),8))
     
-    Y[i,] = left_knee_DATA[i,1],right_knee_DATA[i,1],left_ankle_DATA[i,1],right_ankle_DATA[i,1],left_foot_DATA[i,1],right_foot_DATA[i,1],left_hell_DATA[i,1],right_hell_DATA[i,1]
+    X[:,0] = left_knee_DATA[:,0]
+    X[:,1] = right_knee_DATA[:,0]
+    X[:,2] = left_ankle_DATA[:,0]
+    X[:,3] = right_ankle_DATA[:,0]
+    X[:,4] = left_foot_DATA[:,0]
+    X[:,5] = right_foot_DATA[:,0]
+    X[:,6] = left_hell_DATA[:,0]
+    X[:,7] = right_hell_DATA[:,0]
     
-    Z[i,] = left_knee_DATA[i,2],right_knee_DATA[i,2],left_ankle_DATA[i,2],right_ankle_DATA[i,2],left_foot_DATA[i,2],right_foot_DATA[i,2],left_hell_DATA[i,2],right_hell_DATA[i,2]
+    Y[:,0] = left_knee_DATA[:,1]
+    Y[:,1] = right_knee_DATA[:,1]
+    Y[:,2] = left_ankle_DATA[:,1]
+    Y[:,3] = right_ankle_DATA[:,1]
+    Y[:,4] = left_foot_DATA[:,1]
+    Y[:,5] = right_foot_DATA[:,1]
+    Y[:,6] = left_hell_DATA[:,1]
+    Y[:,7] = right_hell_DATA[:,1]
+    
+    Z[:,0] = left_knee_DATA[:,2]
+    Z[:,1] = right_knee_DATA[:,2]
+    Z[:,2] = left_ankle_DATA[:,2]
+    Z[:,3] = right_ankle_DATA[:,2]
+    Z[:,4] = left_foot_DATA[:,2]
+    Z[:,5] = right_foot_DATA[:,2]
+    Z[:,6] = left_hell_DATA[:,2]
+    Z[:,7] = right_hell_DATA[:,2]
+    
+    #Find Pick Point
+    size = np.size(left_knee_DATA,0)
+    for i in range(size):
+        if i < size-1:
+            Sample = X[i,0]
+            Next_Sample = X[i+1,0]
+        if i == size-1:
+            break
