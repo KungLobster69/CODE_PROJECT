@@ -53,11 +53,74 @@ for Point in Time_series:
     Z[:,6] = left_hell_DATA[:,2]
     Z[:,7] = right_hell_DATA[:,2]
     
-    #Find Pick Point
-    size = np.size(left_knee_DATA,0)
-    for i in range(size):
-        if i < size-1:
-            Sample = X[i,0]
-            Next_Sample = X[i+1,0]
-        if i == size-1:
-            break
+    #Find Pick Point X
+    for i in range(np.size(X,1)):
+        x_point = X[:,i]
+        x_peak = []
+        sample_x_peak = []
+        row_x_peak = []
+        for j in range(np.size(x_point,0)):
+            if j > 0 and j < np.size(x_point,0)-1:
+                After_sample_x_point = x_point[j-1]
+                sample_x_point = x_point[j]
+                Next_sample_x_point = x_point[j+1]
+                
+                # PEAK บน
+                if After_sample_x_point < sample_x_point and sample_x_point > Next_sample_x_point:
+                    sample_x_peak = np.append(sample_x_peak,sample_x_point)
+                    row_x_peak = np.append(row_x_peak,j)
+                    
+                # PEAK ล่าง
+                elif After_sample_x_point > sample_x_point and sample_x_point < Next_sample_x_point:
+                    sample_x_peak = np.append(sample_x_peak,sample_x_point)
+                    row_x_peak = np.append(row_x_peak,j)
+                    
+        x_peak = np.array([sample_x_peak,row_x_peak]).T
+        
+    #Find Pick Point Y
+    for i in range(np.size(Y,1)):
+        y_point = Y[:,i]
+        y_peak = []
+        sample_y_peak = []
+        row_y_peak = []
+        for j in range(np.size(y_point,0)):
+            if j > 0 and j < np.size(y_point,0)-1:
+                After_sample_y_point = y_point[j-1]
+                sample_y_point = y_point[j]
+                Next_sample_y_point = y_point[j+1]
+                
+                # PEAK บน
+                if After_sample_y_point < sample_y_point and sample_y_point > Next_sample_y_point:
+                    sample_y_peak = np.append(sample_y_peak,sample_y_point)
+                    row_y_peak = np.append(row_y_peak,j)
+                    
+                # PEAK ล่าง
+                if After_sample_y_point > sample_y_point and sample_y_point < Next_sample_y_point:
+                    sample_y_peak = np.append(sample_y_peak,sample_y_point)
+                    row_y_peak = np.append(row_y_peak,j)
+                    
+        y_peak = np.array([sample_y_peak,row_y_peak]).T
+
+    #Find Pick Point Z
+    for i in range(np.size(Z,1)):
+        z_point = X[:,i]
+        z_peak = []
+        sample_z_peak = []
+        row_z_peak = []
+        for j in range(np.size(z_point,0)):
+            if j > 0 and j < np.size(z_point,0)-1:
+                After_sample_z_point = z_point[j-1]
+                sample_z_point = z_point[j]
+                Next_sample_z_point = z_point[j+1]
+                
+                # PEAK บน
+                if After_sample_z_point < sample_z_point and sample_z_point > Next_sample_z_point:
+                    sample_z_peak = np.append(sample_z_peak,sample_z_point)
+                    row_z_peak = np.append(row_z_peak,j)
+                    
+                # PEAK ล่าง
+                if After_sample_z_point > sample_z_point and sample_z_point < Next_sample_z_point:
+                    sample_z_peak = np.append(sample_z_peak,sample_z_point)
+                    row_z_peak = np.append(row_z_peak,j)
+                    
+        z_peak = np.array([sample_z_peak,row_z_peak]).T
