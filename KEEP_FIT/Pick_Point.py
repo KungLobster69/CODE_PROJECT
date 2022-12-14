@@ -3,8 +3,8 @@ import mediapipe as mp
 import pickle
 import matplotlib.pyplot as plt
 
-Data_description = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Data_description', 'rb'))
-Time_series = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Time_series', 'rb'))
+Data_description = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Data_description', 'rb'))
+Time_series = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Time_series', 'rb'))
 
 for Human in Data_description:
     frame_sec = Human[1]
