@@ -3,8 +3,8 @@ import mediapipe as mp
 import pickle
 import matplotlib.pyplot as plt
 
-Data_description = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Data_description', 'rb'))
-Time_series = pickle.load(open('E:\PROJECT\KEEP_FIT\Quest\Time_series', 'rb'))
+Data_description = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Data_description', 'rb'))
+Time_series = pickle.load(open('D:\KUNG_LOBSTER69\Quest\Time_series', 'rb'))
 
 for Human in Data_description:
     frame_sec = Human[1]
@@ -12,6 +12,10 @@ for Human in Data_description:
     time_all_sec = frame_all/frame_sec
     time_all_minutes = (frame_all/frame_sec)/60
     
+X_peak_all = []
+Y_peak_all = []
+Z_peak_all = []
+
 for Point in Time_series:
     left_knee_DATA = Point[0]
     right_knee_DATA = Point[1]
@@ -124,3 +128,5 @@ for Point in Time_series:
                     row_z_peak = np.append(row_z_peak,j)
                     
         z_peak = np.array([sample_z_peak,row_z_peak]).T
+    
+    
